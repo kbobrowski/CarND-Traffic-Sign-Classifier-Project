@@ -142,11 +142,11 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Priority road      		| Priority road   									| 
-| Children crossing     			| Children crossing 										|
-| Go straight or left					| Go straight or left											|
 | Yield	      		| Yield					 				|
+| Go straight or left					| Go straight or left											|
+| Priority road      		| Priority road   									| 
 | No vehicles			| No vehicles      							|
+| Children crossing     			| Children crossing 										|
 
 
 The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set of ...
