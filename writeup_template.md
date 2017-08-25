@@ -65,8 +65,6 @@ Here is an example of a traffic sign image before and after grayscaling.
 
 <img src="./examples/normalized.png" width="600">
 
-![alt text][image2]
-
 As a last step, I normalized the image data because ...
 
 I decided to generate additional data because ... 
@@ -75,7 +73,7 @@ To add more data to the the data set, I used the following techniques because ..
 
 Here is an example of an original image and an augmented image:
 
-![alt text][image3]
+<img src="./examples/augmented.png" width="600">
 
 The difference between the original data set and the augmented data set is the following ... 
 
