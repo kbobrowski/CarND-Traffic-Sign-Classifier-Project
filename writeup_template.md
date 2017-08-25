@@ -21,10 +21,10 @@ The goals / steps of this project are the following:
 [image2]: ./examples/normalized.png "Histogram normalization"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./test_signs_web/Capture.PNG "Traffic Sign 1"
-[image5]: ./test_signs_web/Capture1.PNG "Traffic Sign 2"
-[image6]: ./test_signs_web/Capture2.PNG "Traffic Sign 3"
-[image7]: ./test_signs_web/Capture3.PNG "Traffic Sign 4"
-[image8]: ./test_signs_web/Capture4.PNG "Traffic Sign 5"
+[image5]: ./test_signs_web/Capture2.PNG "Traffic Sign 2"
+[image6]: ./test_signs_web/Capture3.PNG "Traffic Sign 3"
+[image7]: ./test_signs_web/Capture4.PNG "Traffic Sign 4"
+[image8]: ./test_signs_web/Capture5.PNG "Traffic Sign 5"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
