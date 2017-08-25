@@ -63,7 +63,7 @@ As a first step, I decided to convert the images to grayscale because ...
 
 Here is an example of a traffic sign image before and after grayscaling.
 
-<img src="./examples/normalized.png" alt="Drawing" style="width: 600px;"/>
+<img src="./examples/normalized.png" width="600">
 
 ![alt text][image2]
 
