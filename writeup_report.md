@@ -21,6 +21,13 @@ The goals / steps of this project are the following:
 [image2]: ./examples/normalized.png "Histogram normalization"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/allimages.png "All test images"
+[top51]: ./examples/top51.png ""
+[top52]: ./examples/top52.png ""
+[top53]: ./examples/top53.png ""
+[top54]: ./examples/top54.png ""
+[top55]: ./examples/top55.png ""
+[top56]: ./examples/top56.png ""
+[features]: ./examples/feature_map.png
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -112,7 +119,7 @@ First architecture chosen was LeNet, which achieved only 90% accuracy after 30 e
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Since all 5 German were predicted correctly with 100% accuracy, additional 5 cartoon-like traffic signs has been tested, as well as 5 random images.
+Since all 5 German were predicted correctly with 100% confidence, additional 5 cartoon-like traffic signs has been tested, as well as 5 random images.
 
 Here are 15 images that I found on the web:
   
@@ -132,26 +139,24 @@ Here are the results of the prediction:
 | Children crossing     			| Children crossing 										|
 
 
-The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set of 98.5%
+The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set of 98.5%.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-For the first image, the model is sure that this is a priority sign (probability of 1.0), and the image does contain a priority sign. The top five soft max probabilities were
+Softmax probabilities are visualized as bar charts:
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| 1.0         			| Priority road   									| 
-| 1.0     				| Children crossing 										|
-| 1.0					| Go straight or left											|
-| 1.0	      			| Yield					 				|
-| 1.0				    | No vehicles      							|
-
-
-For the second image ... 
+![top51][top51]
+![top52][top52]
+![top53][top53]
+![top54][top54]
+![top55][top55]
+![top56][top56]
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
+Activations of first 23 filters of the first convolutional layer are visualized below. "No entry" sign has been used as an input for the network. It can be seen that the neural network uses circular shape and horizontal bar as the main features to classify this traffic sign.
 
+![feature map][features]
