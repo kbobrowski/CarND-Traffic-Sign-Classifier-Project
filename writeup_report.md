@@ -28,6 +28,7 @@ The goals / steps of this project are the following:
 [top55]: ./examples/top55.png ""
 [top56]: ./examples/top56.png ""
 [features]: ./examples/feature_map.png
+[history]: ./examples/history.png
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -113,7 +114,10 @@ My final model results were:
 * validation set accuracy of 0.997052
 * test set accuracy of 0.985193
 
-First architecture chosen was LeNet, which achieved only 90% accuracy after 30 epochs. Since training accuracy was close to 100%, this indicated overfitting. Adding 0.7 dropout layers improved validation accuracy to 93%. Accuracy has been further improved by adding one convolutional layer and significantly increasing depth of convolutional layers (which resemles architecture used in "Committee of CNNs" by IDSIA team), achieving validation accuracy close to 99% for both normalization methods (with / without grayscaling). Taking further inspiration from "Committee of CNNs" architecture, final model averages logits predicted by 6 networks: 3 networks with grayscaling in preprocessing step and 3 networks without grayscaling (each network has been trained from different starting point), which allowed to achieve validation accuracy of 99.7% and test accuracy of 98.5%, which is not too far from human performance (98.8%).
+First LeNet architecture was chosen, which achieved only 90% accuracy after 30 epochs. Since training accuracy was close to 100%, this indicated overfitting. Adding 0.7 dropout layers improved validation accuracy to 93%. Accuracy has been further improved by adding one convolutional layer and significantly increasing depth of convolutional layers (which resemles architecture used in "Committee of CNNs" by IDSIA team), achieving validation accuracy close to 99% for both normalization methods (with / without grayscaling). Taking further inspiration from "Committee of CNNs" architecture, final model averages logits predicted by 6 networks: 3 networks with grayscaling in preprocessing step and 3 networks without grayscaling (each network has been trained from different starting point), which allowed to achieve validation accuracy of 99.7% and test accuracy of 98.5%, which is not too far from human performance (98.8%). Accuracy convergence is visualized below:
+
+![accuracy convergence][history]
+
 
 ### Test a Model on New Images
 
@@ -143,7 +147,7 @@ The model was able to correctly guess 5 of the 5 traffic signs, which gives an a
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 14th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 14th cell of the jupyter notebook.
 
 Softmax probabilities are visualized as bar charts:
 
@@ -154,7 +158,7 @@ Softmax probabilities are visualized as bar charts:
 ![top55][top55]
 ![top56][top56]
 
-For the standard 5 German traffic signs, the model is 100% certain. For the first 3 cartoon-like traffic signs the model is correctly 100% certain, and failed to correctly predict last 2 (although for the 4th correct prediction is given 18% certainty). 5th cartoon-like traffic sign was possibly the most difficult, due to unusual pattern instead of solid color in the background. There was no correct prediction for the random images, as these types did not exist in the training database, although there are some patterns visible. First random image has been predicted as priority road due to similar shape and color. Second was predicted as "no entry" due to horizontal bar in the middle. Finally, feeding random images to the network leeds to interesting conclusion - algorithm to detect traffic signs from the video stream has to be very reliable, and possibly traffic sign classification network should itslef determine that image is not a traffic sign.
+For the standard 5 German traffic signs, the model is 100% certain. For the first 3 cartoon-like traffic signs the model is correctly 100% certain, and failed to correctly predict last 2 (although for the 4th correct prediction is given 18% certainty). 5th cartoon-like traffic sign was possibly the most difficult, due to unusual pattern instead of solid color in the background. There was no correct prediction for the random images, as these types did not exist in the training database, although there are some patterns visible. First random image has been predicted as priority road due to similar shape and color. Second was predicted as "no entry" due to horizontal bar in the middle. Finally, feeding random images to the network leeds to interesting conclusion - algorithm to detect traffic signs from the video stream has to be very reliable, and possibly traffic sign classification network should itslef determine that image is not a traffic sign, otherwise a situation that a dog crossing the street is given 90% certainty that it is "priority road" is possible.
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
