@@ -1,54 +1,168 @@
-## Project: Build a Traffic Sign Recognition Program
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+# **Traffic Sign Recognition** 
 
-Overview
+## Writeup
+
 ---
-In this project, you will use what you've learned about deep neural networks and convolutional neural networks to classify traffic signs. You will train and validate a model so it can classify traffic sign images using the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset). After the model is trained, you will then try out your model on images of German traffic signs that you find on the web.
 
-We have included an Ipython notebook that contains further instructions 
-and starter code. Be sure to download the [Ipython notebook](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb). 
+**Build a Traffic Sign Recognition Project**
 
-We also want you to create a detailed writeup of the project. Check out the [writeup template](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup. The writeup can be either a markdown file or a pdf document.
-
-To meet specifications, the project will require submitting three files: 
-* the Ipython notebook with the code
-* the code exported as an html file
-* a writeup report either as a markdown or pdf file 
-
-Creating a Great Writeup
----
-A great writeup should include the [rubric points](https://review.udacity.com/#!/rubrics/481/view) as well as your description of how you addressed each point.  You should include a detailed description of the code used in each step (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
-
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
-
-The Project
----
 The goals / steps of this project are the following:
-* Load the data set
+* Load the data set (see below for links to the project data set)
 * Explore, summarize and visualize the data set
 * Design, train and test a model architecture
 * Use the model to make predictions on new images
 * Analyze the softmax probabilities of the new images
 * Summarize the results with a written report
 
-### Dependencies
-This lab requires:
 
-* [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit)
+[//]: # (Image References)
 
-The lab environment can be created with CarND Term1 Starter Kit. Click [here](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) for the details.
+[image1]: ./examples/histogram_visualization.png "Visualization"
+[image2]: ./examples/normalized.png "Histogram normalization"
+[image3]: ./examples/random_noise.jpg "Random Noise"
+[image4]: ./examples/allimages.png "All test images"
+[top51]: ./examples/top51.png ""
+[top52]: ./examples/top52.png ""
+[top53]: ./examples/top53.png ""
+[top54]: ./examples/top54.png ""
+[top55]: ./examples/top55.png ""
+[top56]: ./examples/top56.png ""
+[features]: ./examples/feature_map.png
+[history]: ./examples/history.png
 
-### Dataset and Repository
+## Rubric Points
+### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
-1. Download the data set. The classroom has a link to the data set in the "Project Instructions" content. This is a pickled dataset in which we've already resized the images to 32x32. It contains a training, validation and test set.
-2. Clone the project, which contains the Ipython notebook and the writeup template.
-```sh
-git clone https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project
-cd CarND-Traffic-Sign-Classifier-Project
-jupyter notebook Traffic_Sign_Classifier.ipynb
-```
+---
+### Writeup / README
 
-### Requirements for Submission
-Follow the instructions in the `Traffic_Sign_Classifier.ipynb` notebook and write the project report using the writeup template as a guide, `writeup_template.md`. Submit the project code and writeup document.
+#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
+
+You're reading it! and here is a link to my [project code](Traffic_Sign_Classifier.ipynb)
+
+### Data Set Summary & Exploration
+
+#### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
+
+I used the numpy library to calculate summary statistics of the traffic
+signs data set:
+
+* The size of training set is 34799
+* The size of the validation set is 4410
+* The size of test set is 12630
+* The shape of a traffic sign image is 32x32
+* The number of unique classes/labels in the data set is 43
+
+#### 2. Include an exploratory visualization of the dataset.
+
+Here is an exploratory visualization of the data set. It is a bar chart showing how often different types of the traffic signs occur in the database.
+
+![alt text][image1]
+
+### Design and Test a Model Architecture
+
+#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+
+As a first step, I decided to normalize the histogram, in both color and grayscale mode, to reduce over/under exposure and differences in contrast.
+
+Here is an example of a traffic sign image before and after adjusting histogram.
+
+<img src="./examples/normalized.png" width="600">
+
+As a last step, I normalized the image data to improve training convergence.
+
+I decided to introduce data augmentation to prevent overfitting. I used the following techniques: rotation, scaling and translation, because these types of differences occur naturally in the database.
+
+Here is an example of an original image and an augmented image:
+
+<img src="./examples/augmented.png" width="600">
+
+No new dataset is generated, instead data is augmented dynamically during training.
+
+#### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+
+My final model consisted of the following layers:
+
+| Layer         		|     Description	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Input         		| 32x32x3 RGB image or 32x32x1 greyscale image   							| 
+| Convolution 7x7     	| 1x1 stride, valid padding, outputs 26x26x96 	|
+| RELU					|												|
+| Convolution 5x5     	| 1x1 stride, valid padding, outputs 22x22x128 	|
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  outputs 11x11x128 				|
+| Convolution 4x4     	| 1x1 stride, valid padding, outputs 8x8x256 	|
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  outputs 4x4x256 				|
+| Fully connected		| outputs 352	|
+| RELU					|												|
+| Fully connected		| outputs 128	|
+| RELU					|												|
+| Fully connected		| outputs 43	|
+| Softmax				|      	|
+ 
+Furthermore, I have trained overall 6 models, 3 for each of the 2 normalization techniques (with or without grayscaling), using different initial weights to train each model.
+
+#### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+
+To train the model, I used an adam optimizer. Batch size was set to 256 and the number of epochs to 30. Learning rate was determined automatically by the optimizer. 
+
+#### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+
+My final model results were:
+* training set accuracy of 0.999885
+* validation set accuracy of 0.997052
+* test set accuracy of 0.985193
+
+First LeNet architecture was chosen, which achieved only 90% accuracy after 30 epochs. Since training accuracy was close to 100%, this indicated overfitting. Adding 0.7 dropout layers improved validation accuracy to 93%. Accuracy has been further improved by adding one convolutional layer and significantly increasing depth of convolutional layers (which resemles architecture used in "Committee of CNNs" by IDSIA team), achieving validation accuracy close to 99% for both normalization methods (with / without grayscaling). Taking further inspiration from "Committee of CNNs" architecture, final model averages logits predicted by 6 networks: 3 networks with grayscaling in preprocessing step and 3 networks without grayscaling (each network has been trained from different starting point), which allowed to achieve validation accuracy of 99.7% and test accuracy of 98.5%, which is not too far from human performance (98.8%). Accuracy convergence is visualized below (DeepNet_norm2 and DeepNet_norm3 correspond to final network with and without grayscaling correspondingly):
+
+![accuracy convergence][history]
+
+
+### Test a Model on New Images
+
+#### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+
+Since all 5 German were predicted correctly with 100% confidence, additional 5 cartoon-like traffic signs has been tested, as well as 5 random images.
+
+Here are 15 images that I found on the web:
+  
+![alt text][image4]
+
+
+#### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+
+Here are the results of the prediction:
+
+| Image			        |     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Yield	      		| Yield					 				|
+| Go straight or left					| Go straight or left											|
+| Priority road      		| Priority road   									| 
+| No vehicles			| No vehicles      							|
+| Children crossing     			| Children crossing 										|
+
+
+The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set of 98.5%.
+
+#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
+
+The code for making predictions on my final model is located in the 14th cell of the jupyter notebook.
+
+Softmax probabilities are visualized as bar charts:
+
+![top51][top51]
+![top52][top52]
+![top53][top53]
+![top54][top54]
+![top55][top55]
+![top56][top56]
+
+For the standard 5 German traffic signs, the model is 100% certain. For the first 3 cartoon-like traffic signs the model is correctly 100% certain, and failed to correctly predict last 2 (although for the 4th correct prediction is given 18% certainty). 5th cartoon-like traffic sign was possibly the most difficult, due to unusual pattern instead of solid color in the background. There was no correct prediction for the random images, as these types did not exist in the training database, although there are some patterns visible. First random image has been predicted as priority road due to similar shape and color. Second was predicted as "no entry" due to horizontal bar in the middle. Finally, feeding random images to the network leeds to interesting conclusion - algorithm to detect traffic signs from the video stream has to be very reliable, and possibly traffic sign classification network should itslef determine that image is not a traffic sign, otherwise a situation that a dog crossing the street is given 90% certainty that it is "priority road" is possible.
+
+### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
+#### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
+
+Activations of first 24 filters of the first convolutional layer are visualized below. "No entry" sign has been used as an input for the network. It can be seen that the neural network uses circular shape and horizontal bar as the main features to classify this traffic sign.
+
+![feature map][features]
