@@ -17,7 +17,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/histogram_visualization.jpg "Visualization"
+[image1]: ./examples/histogram_visualization.png "Visualization"
 [image2]: ./examples/normalized.png "Histogram normalization"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./test_signs_web/Capture.PNG "Traffic Sign 1"
